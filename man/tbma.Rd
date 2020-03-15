@@ -44,6 +44,8 @@ tbma(
 
 \item{max_depth}{Maximum depth of decision trees. See the documentation of the ranger fuction in ranger package for details.}
 
+\item{num_trees}{Number of trees}
+
 \item{ma_order}{Order of the movinh average part of the TBMA model. Default is 2. High order parameter can lead NA forecasts.}
 
 \item{mtry}{Number of variables selected as candidate varibles for splitting. See the documentation of the ranger fuction in ranger package for details.}
@@ -52,7 +54,7 @@ tbma(
 A data.table object. In case of point forecasting, a column called "prediction" is added to the data table that contains the columns mentioned in the formula. In case of probabilistic forecasting, columns named with the percentile values are added to thr data table that contains the columns mentioned in the formula.
 }
 \description{
-Tree-based Moving Average model is proposed by Baydogan & Sel (2020) for time series forecasting problems, particularly with a large number of predictors. The TBMA model can provide point and probabilistic forecasts.
+A new tree-based ensemble model that is called tree-based moving average (TBMA) is provided for time series forecasting problems. The TBMA model provides point and probabilistic forecasts and uses both of the tree-based ensemble and MA approaches to consider predictors and time series components. With the use of the tree-based ensemble and MA approaches, the TBMA model can handle a large number of numerical and categorical predictors without sacrificing the accuracy and capture autocorrelation between time series observations.
 }
 \examples{
 \dontrun{

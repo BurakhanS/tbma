@@ -2,7 +2,7 @@
 
 #'Tree-based Moving Average
 #'
-#'Tree-based Moving Average model is proposed by Baydogan & Sel (2020) for time series forecasting problems, particularly with a large number of predictors. The TBMA model can provide point and probabilistic forecasts.
+#' A new tree-based ensemble model that is called tree-based moving average (TBMA) is provided for time series forecasting problems. The TBMA model provides point and probabilistic forecasts and uses both of the tree-based ensemble and MA approaches to consider predictors and time series components. With the use of the tree-based ensemble and MA approaches, the TBMA model can handle a large number of numerical and categorical predictors without sacrificing the accuracy and capture autocorrelation between time series observations.
 #'
 #'@param formula Object of class formula
 #'@param train A data.table object
@@ -15,6 +15,7 @@
 #'@param always_split_variables Vector of column names indicating the colums that should be selected as candidate variables for splitting. See the documentation of the ranger fuction in ranger package for details.
 #'@param min_node_size Minimum node size allowed in terminal nodes of decesion trees.
 #'@param max_depth Maximum depth of decision trees. See the documentation of the ranger fuction in ranger package for details.
+#'@param num_trees Number of trees
 #'@param mtry Number of variables selected as candidate varibles for splitting. See the documentation of the ranger fuction in ranger package for details.
 #'@param ma_order Order of the movinh average part of the TBMA model. Default is 2. High order parameter can lead NA forecasts.
 #'
@@ -24,6 +25,8 @@
 #' @import zoo
 #' @import ranger
 #' @import RcppRoll
+#' @import stats
+#' @import utils
 #' @examples
 #' \dontrun{
 #' library(datasets)
@@ -38,7 +41,6 @@
 #' test <- airquality[103:nrow(airquality), ]
 
 #' test_data_with_predictions<-tbma(Temp ~ .,train = train,test = test,prediction_type = "point",horizon=100,ma_order = 2)
-
 #' }
 tbma<-function(formula,train,test,prediction_type="point",percentile=c(0.25,0.5,0.75),group_id=NULL,horizon=nrow(train),splitrule="extratrees",always_split_variables=NULL,min_node_size=5,max_depth=NULL,num_trees=100,ma_order=2,mtry=round(sqrt(ncol(train)))){
 
