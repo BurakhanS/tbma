@@ -23,6 +23,7 @@
 #' @import data.table
 #' @import zoo
 #' @import ranger
+#' @import RcppRoll
 #' @examples
 #' \dontrun{
 #' library(datasets)
@@ -107,7 +108,7 @@ tbma<-function(formula,train,test,prediction_type="point",percentile=c(0.25,0.5,
     setDT(baseline)[, id := .GRP, by=list(variable,value,group_id)]}
 
   #apply moving average
-  baseline[,candidate_forecast:=roll_meanr(c(response),ma_order,fill = NA,na.rm = F),by=id]
+  baseline[,candidate_forecast:=RcppRoll::roll_meanr(c(response),ma_order,fill = NA,na.rm = F),by=id]
   baseline[,candidate_forecast := shift(candidate_forecast, fill = NA,n=1), by = id]
 
   #seperate the test data from the combined inbag and test data

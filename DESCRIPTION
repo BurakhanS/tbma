@@ -11,6 +11,6 @@ LazyData: true
 RoxygenNote: 7.0.2
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
-Imports: data.table, ranger, zoo
+Imports: data.table, ranger, zoo, RcppRoll
 NeedsCompilation: no
-Packaged: 2020-03-14 13:45:19 UTC; Burakhan
+Packaged: 2020-03-15 06:51:21 UTC; Burakhan
