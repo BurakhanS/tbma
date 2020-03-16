@@ -27,6 +27,7 @@
 #' @import RcppRoll
 #' @import stats
 #' @import utils
+#'
 #' @examples
 #' \dontrun{
 #' library(datasets)
@@ -40,11 +41,24 @@
 #' train <- airquality[1:102,]
 #' test <- airquality[103:nrow(airquality), ]
 
-#' test_data_with_predictions<-tbma(Temp ~ .,train = train,test = test,prediction_type = "point",horizon=100,ma_order = 2)
+#' test_data_with_predictions<-tbma(Temp ~ .,train = train,test = test,
+#' prediction_type = "point",horizon=100,ma_order = 2)
 #' }
+
+
+
 tbma<-function(formula,train,test,prediction_type="point",percentile=c(0.25,0.5,0.75),group_id=NULL,horizon=nrow(train),splitrule="extratrees",always_split_variables=NULL,min_node_size=5,max_depth=NULL,num_trees=100,ma_order=2,mtry=round(sqrt(ncol(train)))){
 
+  Order<-NULL
+  response<-NULL
+  basenames<-NULL
+  value<-NULL
+  id<-NULL
+  variable<-NULL
+  candidate_forecast<-NULL
+
   if(length(group_id)>1){print("pelase enter only one column name as group identity")}
+
 
 
   #subset the data according to the formula

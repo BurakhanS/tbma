@@ -14,5 +14,5 @@ Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Imports: data.table, ranger, zoo, RcppRoll
 NeedsCompilation: no
-Packaged: 2020-03-15 12:12:40 UTC; Burakhan
+Packaged: 2020-03-16 05:34:58 UTC; Burakhan
 Maintainer: Burakhan Sel <burakhan.sel@boun.edu.tr>

@@ -65,6 +65,7 @@ airquality<-as.data.table(airquality)
 airquality[complete.cases(ariquality)]
 train <- airquality[1:102,]
 test <- airquality[103:nrow(airquality), ]
-test_data_with_predictions<-tbma(Temp ~ .,train = train,test = test,prediction_type = "point",horizon=100,ma_order = 2)
+test_data_with_predictions<-tbma(Temp ~ .,train = train,test = test,
+prediction_type = "point",horizon=100,ma_order = 2)
 }
 }
