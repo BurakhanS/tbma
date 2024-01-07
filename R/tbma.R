@@ -21,12 +21,12 @@
 #'
 #' @return A data.table object. In case of point forecasting, a column called "prediction" is added to the data table that contains the columns mentioned in the formula. In case of probabilistic forecasting, columns named with the percentile values are added to thr data table that contains the columns mentioned in the formula.
 #' @export
-#' @import data.table
-#' @import zoo
-#' @import ranger
-#' @import RcppRoll
-#' @import stats
-#' @import utils
+#' @importFrom RcppRoll roll_meanr
+#' @importFrom data.table := .GRP as.data.table copy data.table melt setDT shift
+#' @importFrom ranger ranger
+#' @importFrom stats median model.frame predict quantile
+#' @importFrom utils tail
+#' @importFrom zoo na.locf
 #'
 #' @examples
 #' \dontrun{
@@ -124,7 +124,7 @@ tbma<-function(formula,train,test,prediction_type="point",percentile=c(0.25,0.5,
     setDT(baseline)[, id := .GRP, by=list(variable,value,group_id)]}
 
   #apply moving average
-  baseline[,candidate_forecast:=RcppRoll::roll_meanr(c(response),ma_order,fill = NA,na.rm = F),by=id]
+  baseline[,candidate_forecast:=roll_meanr(c(response),ma_order,fill = NA,na.rm = F),by=id]
   baseline[,candidate_forecast := shift(candidate_forecast, fill = NA,n=1), by = id]
 
   #seperate the test data from the combined inbag and test data
