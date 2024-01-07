@@ -9,7 +9,7 @@ Description: A new tree-based ensemble model that is called tree-based moving av
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.2.3
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Imports: data.table, ranger, zoo, RcppRoll
